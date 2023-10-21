@@ -1,26 +1,20 @@
 from django.db import models
 from django import forms  
 from django.contrib.auth.models import Permission
+from django.contrib.auth.models import User
+
 
 # Create your models here.
 
-class StudentForm(forms.Form):  
-    firstname = forms.CharField(label="Enter first name",max_length=50)  
-    lastname  = forms.CharField(label="Enter last name", max_length = 10)    
-    file      = forms.FileField() # for creating file input  
+class StudentForm(models.Model):  
+    # firstname = forms.CharField(label="Enter first name",max_length=50)  
+    # lastname  = forms.CharField(label="Enter last name", max_length = 10)    
+    file = models.FileField(upload_to='documents/') # for creating file input  
 
-
-class student(models.Model):
-    first_name = models.CharField(max_length=30)
-    last_name = models.CharField(max_length=30)
-    email = models.EmailField()
-
-    def __str__(self):
-        return f"{self.first_name} {self.last_name}"
 
 class Classroom(models.Model):
     classroom_name = models.CharField(max_length=30)
-    students = models.ManyToManyField(student)
+    students = models.ManyToManyField(User)
     
     def __str__(self):
         return self.classroom_name
@@ -28,7 +22,7 @@ class Classroom(models.Model):
 class note(models.Model):
     title = models.CharField(max_length=100)
     note_date = models.DateField()
-    student = models.ForeignKey(student, on_delete=models.CASCADE)
+    student = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.title
@@ -45,5 +39,5 @@ class UploadedFile(models.Model):
 def assign_permission_to_student(classroom_id, student):
     permission = Permission.objects.get(codename='view_classroom_files')
     classroom = Classroom.objects.get(id=classroom_id)
-    classroom.students.add(student)
+    classroom.user.add(User)
     student.user.user_permissions.add(permission)

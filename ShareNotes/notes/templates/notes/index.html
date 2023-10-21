@@ -6,9 +6,10 @@
     <title>File Upload</title>
 </head>
 <body>  
-    <form method="POST" class="post-form" enctype="multipart/form-data">  
+    <form method="POST" action="/" class="post-form" enctype="multipart/form-data">  
             {% csrf_token %}  
-            {{ form.as_p }}  
+            <label for="file_input">File Upload</label>
+            <input type="file" id="file_input" name="file_input" accept=".doc,.doxc,.pdf,.jpeg,.png" />
             <button type="submit" class="save btn btn-default">Save</button>  
     </form>  
     </body>  

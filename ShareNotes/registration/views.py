@@ -15,7 +15,7 @@ def registration(req:HttpRequest):
             last_name=req.POST.get("last_name")
         )
         login(req,user)
-        return HttpResponse("<h1>You are Registered</h1>")
+        return render(req,"/notes/index/")
     else:
         return render(req, "registration/registration.html", {"url": "/registration/"})
 
@@ -27,7 +27,7 @@ def log_in(req:HttpRequest):
         print(req.POST.get("psw"))
         if user is not None:
             login(req, user) # this is the part I missed
-            return HttpResponse("<h1>You are Logged In<h1>")
+            return render(req,"/notes/index/")
         
         return render(req, "registration/login.html", {"url": "/login/"})
     else:
