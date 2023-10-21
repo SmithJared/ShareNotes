@@ -7,6 +7,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),  
     path('upload/', views.upload, name='upload'),
     path('splash/', views.splash),  
+    path('view/<str:name>/', views.view_files, name = "view"),
     path('student/<str:last_name>/', views.student, name="student"),
     path('create_note/<int:recipient_id>/', views.create_note, name='create_note'),
     path('inbox/', views.inbox, name='inbox'),

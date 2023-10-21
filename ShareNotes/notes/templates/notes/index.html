@@ -47,9 +47,9 @@
     <div class="notes-list">
         <h2>View Notes</h2>
         <ul>
-            {% for files in files %}
+            {% for file in files %}
                 <li>
-                    <a href="/view/{{ file.id }}/"></a>
+                    <a href="/view/{{ file.name }}/">File {{ file.id }}</a>
                 </li>
             {% endfor %}
         </ul>
