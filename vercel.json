@@ -1,0 +1,14 @@
+{
+    "builds": [
+      {
+        "src": "ShareNotes/wsgi.py",
+        "use": "@vercel/python"
+      }
+    ],
+    "routes": [
+      {
+        "src": "/(.*)",
+        "dest": "ShareNotes/wsgi.py"
+      }
+    ]
+}
