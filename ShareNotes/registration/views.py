@@ -16,7 +16,7 @@ def registration(req:HttpRequest):
         )
         login(req,user)
         #return redirect(f"/student/{req.user.last_name}/")
-        return redirect("/index/")
+        return redirect("/splash/")
     else:
         return render(req, "registration/registration.html", {"url": "/registration/"})
 
@@ -28,7 +28,7 @@ def log_in(req:HttpRequest):
         if user is not None:
             login(req, user)
             #return redirect(f"/student/{req.user.last_name}/")
-            return redirect("/index/")
+            return redirect("/splash/")
 
         
         return render(req, "registration/login.html", {"url": "/login/"})
