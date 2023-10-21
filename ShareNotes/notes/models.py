@@ -7,10 +7,6 @@ class StudentForm(forms.Form):
     lastname  = forms.CharField(label="Enter last name", max_length = 10)    
     file      = forms.FileField() # for creating file input  
 
-class UploadedFile(models.Model):
-    note = models.ForeignKey(note, on_delete=models.CASCADE)
-    file = models.FileField(upload_to='upload/')  # Define the upload path
-    upload_date = models.DateTimeField(auto_now_add=True)
 
 class student(models.Model):
     first_name = models.CharField(max_length=30)
@@ -29,5 +25,10 @@ class note(models.Model):
     def __str__(self):
         return self.title
 
-    class Meta:
-        ordering = ["title"]
+class Meta:
+    ordering = ["title"]
+    
+class UploadedFile(models.Model):
+    note = models.ForeignKey(note, on_delete=models.CASCADE)
+    file = models.FileField(upload_to='upload/')  # Define the upload path
+    upload_date = models.DateTimeField(auto_now_add=True)
