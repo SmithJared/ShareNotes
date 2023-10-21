@@ -22,6 +22,9 @@ def upload(req: HttpRequest):
         return render(req,"notes/upload_note.html") 
     else:  
         return render(req,"notes/upload_note.html") 
+    
+def splash(req:HttpRequest):
+    return render(req, "notes/index.html")
 
 def student(req: HttpRequest, last_name):
     return render(req,"notes/base.html",{'user':req.user}) 
