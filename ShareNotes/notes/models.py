@@ -31,7 +31,7 @@ def assign_permission_to_student(classroom_id, student):
     classroom.user.add(settings.AUTH_USER_MODEL)
     student.user.user_permissions.add(permission)
 
-class NoteCreate(models.Model):
+class Note(models.Model):
     sender = models.ForeignKey(User, on_delete=models.CASCADE, related_name='sent_notes')
     recipient = models.ForeignKey(User, on_delete=models.CASCADE, related_name='received_notes')
     content = models.TextField()
