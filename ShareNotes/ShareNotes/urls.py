@@ -21,4 +21,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     #path('', include("notes.urls")),
     path('', include("core.urls")),
+    path('',include("registration.urls")),
+    path('', include("registration.urls")),
 ]
