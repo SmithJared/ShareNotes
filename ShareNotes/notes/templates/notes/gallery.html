@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'your_app/styles.css' %}">
+    <title>Photo Gallery</title>
+</head>
+<body>
+    <header>
+        <!-- Header content -->
+    </header>
+
+    <div class="photo-gallery">
+        {% for photo in photos %}
+        <div class="photo-box">
+            <img src="{{ photo.image.url }}" alt="{{ photo.caption }}">
+            <div class="caption">
+                {{ photo.caption }}
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    <!-- Footer content -->
+</body>
+</html>

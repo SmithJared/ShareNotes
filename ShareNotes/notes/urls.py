@@ -7,5 +7,10 @@ urlpatterns = [
     path('admin/', admin.site.urls),  
     path('index/', views.index),  
     path('student/<str:last_name>/', views.student, name="student"),
+    path('create_note/<int:recipient_id>/', views.create_note, name='create_note'),
+    path('inbox/', views.inbox, name='inbox'),
+    path('select-classroom/', views.select_classroom, name='select_classroom'),
+    path('upload-note/<int:classroom_id>/', views.upload_note, name='upload_note'),
+    path('classroom/', views.classroom, name='classroom'),
 ]
 

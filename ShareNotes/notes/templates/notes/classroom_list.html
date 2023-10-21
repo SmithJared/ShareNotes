@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My Classrooms</title>
+</head>
+<body>
+    <h1>My Classrooms</h1>
+    <ul>
+        {% for classroom in classrooms %}
+            <li><a href="{% url 'select_classroom' %}">{{ classroom.name }}</a></li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

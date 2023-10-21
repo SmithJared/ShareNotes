@@ -1,8 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import Permission
 from django.conf import settings
-
-
+from django.contrib.auth.models import User
 
 # Create your models here.
 class Classroom(models.Model):
@@ -31,3 +30,9 @@ def assign_permission_to_student(classroom_id, student):
     classroom = Classroom.objects.get(id=classroom_id)
     classroom.user.add(settings.AUTH_USER_MODEL)
     student.user.user_permissions.add(permission)
+
+class Note(models.Model):
+    sender = models.ForeignKey(User, on_delete=models.CASCADE, related_name='sent_notes')
+    recipient = models.ForeignKey(User, on_delete=models.CASCADE, related_name='received_notes')
+    content = models.TextField()
+    timestamp = models.DateTimeField(auto_now_add=True)
