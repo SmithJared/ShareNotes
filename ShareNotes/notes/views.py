@@ -24,7 +24,8 @@ def upload(req: HttpRequest):
         return render(req,"notes/upload_note.html") 
     
 def splash(req:HttpRequest):
-    return render(req, "notes/index.html")
+    files = UploadedFile.objects.filter(student=req.user)
+    return render(req, "notes/index.html", {"files": files})
 
 def student(req: HttpRequest, last_name):
     return render(req,"notes/base.html",{'user':req.user}) 
