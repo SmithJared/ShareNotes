@@ -1,14 +1,17 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <link rel="stylesheet" type="text/css" href="{% static 'notes/css/classroom_list.css' %}">
     <title>My Classrooms</title>
 </head>
 <body>
-    <h1>My Classrooms</h1>
-    <ul>
-        {% for classroom in classrooms %}
-            <li><a href="{% url 'select_classroom' %}">{{ classroom.name }}</a></li>
-        {% endfor %}
-    </ul>
+    <div class="container">
+        <h1>My Classrooms</h1>
+        <ul>
+            {% for classroom in classrooms %}
+                <li><a href="{% url 'select_classroom' %}">{{ classroom.name }}</a></li>
+            {% endfor %}
+        </ul>
+    </div>
 </body>
 </html>

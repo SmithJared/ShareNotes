@@ -4,10 +4,10 @@ from django.contrib.auth.decorators import permission_required
 from notes.models import Classroom
 from notes.models import UploadedFile
 from django.shortcuts import render, redirect
-from .models import Note
+from notes.models import NoteCreate
 from django.contrib.auth.decorators import login_required
 from notes.models import User
-from .forms import ClassroomSelectForm, NoteUploadForm
+from notes.forms import ClassroomSelectForm, NoteUploadForm
 
 # Create your views here.
 def index(request: HttpRequest): 
@@ -35,13 +35,13 @@ def create_note(request, recipient_id):
     recipient = User.objects.get(id=recipient_id)
     if request.method == 'POST':
         content = request.POST.get('content')
-        Note.objects.create(sender=request.user, recipient=recipient, content=content)
+        NoteCreate.objects.create(sender=request.user, recipient=recipient, content=content)
         return redirect('inbox')  # Redirect to the inbox or another page
     return render(request, 'create_note.html', {'recipient': recipient})
 
 @login_required
 def inbox(request):
-    received_notes = Note.objects.filter(recipient=request.user).order_by('-timestamp')
+    received_notes = NoteCreate.objects.filter(recipient=request.user).order_by('-timestamp')
     return render(request, 'inbox.html', {'received_notes': received_notes})
 
 @login_required
@@ -50,7 +50,7 @@ def select_classroom(request):
         form = ClassroomSelectForm(request.POST)
         if form.is_valid():
             classroom = form.cleaned_data['classroom']
-            notes = Note.objects.filter(classroom=classroom)
+            notes = NoteCreate.objects.filter(classroom=classroom)
             return render(request, 'classroom.html', {'classroom': classroom, 'notes': notes, 'form': NoteUploadForm()})
     else:
         form = ClassroomSelectForm()
