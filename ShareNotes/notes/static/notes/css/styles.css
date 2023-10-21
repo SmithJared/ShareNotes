@@ -31,9 +31,8 @@ nav a {
     color: #fff;
 }
 
-a:link, a:visited, a:hover, a:active{
-    color: #fff;
-    text-decoration: none;
+.the_files{
+    color: black;
 }
 
 .container {

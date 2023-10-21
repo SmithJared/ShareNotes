@@ -19,12 +19,13 @@ def upload(req: HttpRequest):
         if form.file != None:  
             form.name = req.FILES.get("file_input").name
             form.save()
-            return HttpResponse("<h1>File uploaded successfuly</h1>")  
+            return redirect("/splash/") 
         
         return render(req,"notes/upload_note.html") 
     else:  
         return render(req,"notes/upload_note.html") 
     
+@login_required
 def splash(req:HttpRequest):
     files = UploadedFile.objects.filter(student=req.user)
     return render(req, "notes/index.html", {"files": files})
