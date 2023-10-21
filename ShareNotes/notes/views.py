@@ -1,5 +1,6 @@
+from django.conf import settings
 from django.shortcuts import render
-from django.http import HttpResponse, HttpRequest
+from django.http import HttpResponse, HttpRequest, FileResponse
 from django.contrib.auth.decorators import permission_required
 from notes.models import Classroom
 from notes.models import UploadedFile
@@ -16,6 +17,7 @@ def upload(req: HttpRequest):
         form = UploadedFile()
         form.file = req.FILES.get("file_input")  
         if form.file != None:  
+            form.name = req.FILES.get("file_input").name
             form.save()
             return HttpResponse("<h1>File uploaded successfuly</h1>")  
         
@@ -26,6 +28,11 @@ def upload(req: HttpRequest):
 def splash(req:HttpRequest):
     files = UploadedFile.objects.filter(student=req.user)
     return render(req, "notes/index.html", {"files": files})
+
+def view_files(req:HttpRequest, name):
+    path = str(settings.MEDIA_ROOT) + "/documents/" + name
+    print(path)
+    return render(req, "notes/view_file.html", {'path':path})
 
 def student(req: HttpRequest, last_name):
     return render(req,"notes/base.html",{'user':req.user}) 
