@@ -15,7 +15,8 @@ def registration(req:HttpRequest):
             last_name=req.POST.get("last_name")
         )
         login(req,user)
-        return redirect(f"/student/{req.user.last_name}/")
+        #return redirect(f"/student/{req.user.last_name}/")
+        return redirect("/index/")
     else:
         return render(req, "registration/registration.html", {"url": "/registration/"})
 
@@ -26,7 +27,9 @@ def log_in(req:HttpRequest):
         user = authenticate(req, username=req.POST.get("email"), password=req.POST.get("psw"))
         if user is not None:
             login(req, user)
-            return redirect(f"/student/{req.user.last_name}/")
+            #return redirect(f"/student/{req.user.last_name}/")
+            return redirect("/index/")
+
         
         return render(req, "registration/login.html", {"url": "/login/"})
     else:

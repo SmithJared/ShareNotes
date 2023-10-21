@@ -8,6 +8,7 @@
     <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
         {{ form.as_p }}
+        <input type="file" id="file_input" name="file_input" accept=".doc,.doxc,.pdf,.jpeg,.png" />
         <button type="submit">Upload</button>
     </form>
 </body>

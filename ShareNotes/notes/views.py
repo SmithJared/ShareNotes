@@ -4,22 +4,24 @@ from django.contrib.auth.decorators import permission_required
 from notes.models import Classroom
 from notes.models import UploadedFile
 from django.shortcuts import render, redirect
-from .models import Note
+from notes.models import Note
 from django.contrib.auth.decorators import login_required
 from notes.models import User
-from .forms import ClassroomSelectForm, NoteUploadForm
+from notes.forms import ClassroomSelectForm
 
 # Create your views here.
-def index(request: HttpRequest): 
-    if request.method == 'POST':  
+@login_required
+def upload(req: HttpRequest): 
+    if req.method == 'POST':  
         form = UploadedFile()
-        form.file = request.FILES.get("file_input")  
+        form.file = req.FILES.get("file_input")  
         if form.file != None:  
             form.save()
             return HttpResponse("<h1>File uploaded successfuly</h1>")  
-        print("Here I am")
+        
+        return render(req,"notes/upload_note.html") 
     else:  
-        return render(request,"notes/index.html") 
+        return render(req,"notes/upload_note.html") 
 
 def student(req: HttpRequest, last_name):
     return render(req,"notes/base.html",{'user':req.user}) 
@@ -51,7 +53,7 @@ def select_classroom(request):
         if form.is_valid():
             classroom = form.cleaned_data['classroom']
             notes = Note.objects.filter(classroom=classroom)
-            return render(request, 'classroom.html', {'classroom': classroom, 'notes': notes, 'form': NoteUploadForm()})
+            return render(request, 'classroom.html', {'classroom': classroom, 'notes': notes})
     else:
         form = ClassroomSelectForm()
     return render(request, 'select_classroom.html', {'form': form})

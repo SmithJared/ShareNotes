@@ -10,18 +10,11 @@ class Classroom(models.Model):
     
     def __str__(self):
         return self.classroom_name
-
-class note(models.Model):
-    title = models.CharField(max_length=100)
-    note_date = models.DateField()
-
-    def __str__(self):
-        return self.title
     
 class UploadedFile(models.Model):
     classroom = models.ForeignKey(Classroom, on_delete=models.CASCADE)
     student = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, default=1)
-    note = models.ForeignKey(note, on_delete=models.CASCADE)
+    note = models.TextField()
     file = models.FileField(upload_to='documents/') # for creating file input  
     upload_date = models.DateTimeField(auto_now_add=True)
 
