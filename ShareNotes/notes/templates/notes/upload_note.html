@@ -1,15 +1,31 @@
+{% load static %}
 <!DOCTYPE html>
 <html>
 <head>
     <title>Upload Note</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'notes/css/styles.css' %}">
 </head>
 <body>
-    <h1>Upload a Note</h1>
-    <form method="post" enctype="multipart/form-data">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <input type="file" id="file_input" name="file_input" accept=".doc,.doxc,.pdf,.jpeg,.png" />
-        <button type="submit">Upload</button>
-    </form>
+    <header>
+        <h1>Upload a Note</h1>
+        <div class="side-menu">
+            <ul>
+                <ul><a href="/splash/">Back</a></li>
+                <!-- Add more classes here -->
+            </ul>
+        </div>
+    </header>   
+    <div class="container">
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <input type="file" id="file_input" name="file_input" accept=".doc,.doxc,.pdf,.jpeg,.png" />
+            <button type="submit">Upload</button>
+        </form>
+    </div>
+
+    <footer>
+        <p>&copy; 2023 Note Sharing Website</p>
+    </footer>
 </body>
 </html>
