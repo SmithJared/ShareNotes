@@ -12,7 +12,7 @@ class Classroom(models.Model):
         return self.classroom_name
     
 class UploadedFile(models.Model):
-    classroom = models.ForeignKey(Classroom, on_delete=models.CASCADE)
+    classroom = models.ForeignKey(Classroom, on_delete=models.CASCADE, blank=True,null=True )
     student = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, default=1)
     note = models.TextField()
     file = models.FileField(upload_to='documents/') # for creating file input  
