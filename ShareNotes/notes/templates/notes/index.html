@@ -1,16 +1,62 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>File Upload</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'notes/css/styles.css' %}">  <!-- Link to your CSS file -->
+    <title>Note Sharing Website</title>
 </head>
-<body>  
-    <form method="POST" action="/" class="post-form" enctype="multipart/form-data">  
-            {% csrf_token %}  
-            <label for="file_input">File Upload</label>
-            <input type="file" id="file_input" name="file_input" accept=".doc,.doxc,.pdf,.jpeg,.png" />
-            <button type="submit" class="save btn btn-default">Save</button>  
-    </form>  
-    </body>  
+<body>
+    <header>
+        <div class="top-menu">
+            <h1>Note Sharing Website</h1>
+            <nav>
+                <ul>
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/upload/">Upload Note</a></li>
+                    <li><a href="/notes/">View Notes</a></li>
+                </ul>
+            </nav>
+        </div>
+        <div class="side-menu">
+            <h2>My Classes</h2>
+            <ul>
+                <li><a href="/class/class1/">Class 1</a></li>
+                <li><a href="/class/class2/">Class 2</a></li>
+                <li><a href="/class/class3/">Class 3</a></li>
+                <!-- Add more classes here -->
+            </ul>
+        </div>
+    </header>
+
+    <div class="container">
+        <h2>Welcome to the Note Sharing Platform</h2>
+        <p>Share and collaborate on school notes with your peers.</p>
+    </div>
+
+    <div class="upload-form">
+        <h2>Upload Your Notes</h2>
+        <form method="post" enctype="multipart/form-data" action="/upload/">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Upload</button>
+        </form>
+    </div>
+
+    <div class="notes-list">
+        <h2>View Notes</h2>
+        <ul>
+            {% for note in notes %}
+                <li>
+                    <a href="/view/{{ note.id }}/">{{ note.title }}</a>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <footer>
+        <p>&copy; 2023 Note Sharing Website</p>
+    </footer>
+</body>
 </html>
